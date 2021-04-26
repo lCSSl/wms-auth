@@ -33,7 +33,10 @@ router.beforeEach( ( to, from, next ) => {
 						// Message.error( err )
 						next( { path: '/login', query: { redirectURL } } )
 						NProgress.done()
-					} )
+					} ).catch(res=>{
+						next( { path: '/login', query: { redirectURL } } )
+						NProgress.done()
+					})
 				} )
 			} else {
 				if ( to.path === '/login' ) {
