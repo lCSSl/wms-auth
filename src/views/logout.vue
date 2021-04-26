@@ -23,14 +23,20 @@ export default {
   methods: {
     async handleLogout() {
       this.$store.dispatch( 'LogOut' ).then( () => {
-
-      } ).catch(res=>{
-        console.log(res)
-      }).finally(()=>{
         if ( this.redirectURL && this.redirectURL.length > 0 ) {
-          location.href = '/login?redirectURL=' + this.redirectURL
+          this.$router.replace({ path: '/login',query:{
+              redirectURL:this.redirectURL
+            } })
         } else {
-          location.href = '/login'
+          this.$router.replace({ path: '/login'})
+        }
+      } ).catch(res=>{
+        if ( this.redirectURL && this.redirectURL.length > 0 ) {
+          this.$router.replace({ path: '/login',query:{
+              redirectURL:this.redirectURL
+            } })
+        } else {
+          this.$router.replace({ path: '/login'})
         }
       })
     }

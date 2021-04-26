@@ -13,10 +13,30 @@ router.beforeEach( ( to, from, next ) => {
 	const { redirectURL } = to.query
 	if ( getToken() ) {
 		if ( to.path === '/logout' ) {
-			console.log(to.path);
 			next()
 			NProgress.done()
-		}else {
+		}else if ( to.path ==='/login' ){
+			// 判断当前用户是否已拉取完user_info信息
+			store.dispatch( 'GetInfo' ).then( () => {
+				if ( redirectURL && redirectURL.length > 0 ) {
+					if ( to.path === '/login' ) {
+						NProgress.done()
+						window.location.href = redirectURL
+					}
+				}
+				next( { ...to, replace: true } )
+				NProgress.done()
+			} ).catch( err => {
+				store.dispatch( 'LogOut' ).then( () => {
+					// Message.error( err )
+					next( { path: '/login', query: { redirectURL } } )
+					NProgress.done()
+				} ).catch(res=>{
+					next( { path: '/login', query: { redirectURL } } )
+					NProgress.done()
+				})
+			} )
+		} else {
 			if ( store.getters.roles.length === 0 ) {
 				// 判断当前用户是否已拉取完user_info信息
 				store.dispatch( 'GetInfo' ).then( () => {
@@ -26,8 +46,8 @@ router.beforeEach( ( to, from, next ) => {
 							window.location.href = redirectURL
 						}
 					}
-					NProgress.done()
 					next( { ...to, replace: true } )
+					NProgress.done()
 				} ).catch( err => {
 					store.dispatch( 'LogOut' ).then( () => {
 						// Message.error( err )

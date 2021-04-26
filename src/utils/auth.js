@@ -10,11 +10,11 @@ export function getToken() {
 }
 
 export function setToken( token ) {
-	return Cookies.set( TokenKey, token, {  domain } )
+	return Cookies.set( TokenKey, token, { domain } )
 }
 
 export function removeToken() {
-	return Cookies.remove( TokenKey )
+	return Cookies.remove( TokenKey, { domain } )
 }
 
 export function getExpiresIn() {
@@ -22,9 +22,9 @@ export function getExpiresIn() {
 }
 
 export function setExpiresIn( time ) {
-	return Cookies.set( ExpiresInKey, time , { domain })
+	return Cookies.set( ExpiresInKey, time, { domain } )
 }
 
 export function removeExpiresIn() {
-	return Cookies.remove( ExpiresInKey )
+	return Cookies.remove( ExpiresInKey, { domain } )
 }
