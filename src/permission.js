@@ -12,29 +12,35 @@ router.beforeEach( ( to, from, next ) => {
 	NProgress.start()
 	const { redirectURL } = to.query
 	if ( getToken() ) {
-		if ( store.getters.roles.length === 0 ) {
-			// 判断当前用户是否已拉取完user_info信息
-			store.dispatch( 'GetInfo' ).then( () => {
-				if ( redirectURL && redirectURL.length > 0 ) {
-					if ( to.path === '/login' ){
-						NProgress.done()
-						window.location.href = redirectURL
-					}
-				}
-				NProgress.done()
-				next( { ...to, replace: true } )
-			} ).catch( err => {
-				store.dispatch( 'LogOut' ).then( () => {
-					// Message.error( err )
-					next( { path: '/login', query: { redirectURL } } )
-					NProgress.done()
-				} )
-			} )
-		} else {
-			if ( to.path==='/login' ){
-				next( { path: '/apps'} )
-			}
+		if ( to.path === '/logout' ) {
+			console.log(to.path);
 			next()
+			NProgress.done()
+		}else {
+			if ( store.getters.roles.length === 0 ) {
+				// 判断当前用户是否已拉取完user_info信息
+				store.dispatch( 'GetInfo' ).then( () => {
+					if ( redirectURL && redirectURL.length > 0 ) {
+						if ( to.path === '/login' ) {
+							NProgress.done()
+							window.location.href = redirectURL
+						}
+					}
+					NProgress.done()
+					next( { ...to, replace: true } )
+				} ).catch( err => {
+					store.dispatch( 'LogOut' ).then( () => {
+						// Message.error( err )
+						next( { path: '/login', query: { redirectURL } } )
+						NProgress.done()
+					} )
+				} )
+			} else {
+				if ( to.path === '/login' ) {
+					next( { path: '/apps' } )
+				}
+				next()
+			}
 		}
 	} else {
 		// 没有token

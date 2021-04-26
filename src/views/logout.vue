@@ -1,3 +1,8 @@
+<template>
+  <div>
+
+  </div>
+</template>
 <script>
 export default {
   name: 'Logout',
@@ -18,13 +23,16 @@ export default {
   methods: {
     async handleLogout() {
       this.$store.dispatch( 'LogOut' ).then( () => {
-        alert(this.redirectURL)
+
+      } ).catch(res=>{
+        console.log(res)
+      }).finally(()=>{
         if ( this.redirectURL && this.redirectURL.length > 0 ) {
           location.href = '/login?redirectURL=' + this.redirectURL
         } else {
           location.href = '/login'
         }
-      } )
+      })
     }
   }
 }

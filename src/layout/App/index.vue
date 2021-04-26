@@ -7,7 +7,7 @@
           <span class="header-logo-text">KYLMS</span>
         </ICol>
         <ICol type="half">
-          <Navbar v-if="show"/>
+          <Navbar v-if="(token&&token.length>0)"/>
         </ICol>
       </el-row>
     </el-header>
@@ -24,10 +24,11 @@
 <script>
 import { AppMain, Navbar } from '@/layout/components'
 import ResizeMixin from '@/layout/mixin/ResizeHandler'
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import variables from '@/assets/styles/variables.scss'
 import store from '@/store'
 import ICol from '@/components/ICol/index'
+import { getToken } from '@/utils/auth'
 
 export default {
   name: 'AppLayout',
@@ -52,6 +53,7 @@ export default {
       needTagsView: state => state.settings.tagsView,
       fixedHeader: state => state.settings.fixedHeader
     } ),
+    ...mapGetters(["token"]),
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
@@ -70,12 +72,6 @@ export default {
     }
   },
   mounted() {
-    const token = store.getters.token
-    if ( token && token.length > 0 ) {
-      this.show = true
-    } else {
-      this.show = false
-    }
   }
 
 }

@@ -38,7 +38,6 @@
 <script>
 import Cookies from 'js-cookie'
 import { decrypt, encrypt } from '@/utils/jsencrypt'
-import { getToken } from '@/utils/auth'
 
 export default {
   name: 'Login',

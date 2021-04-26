@@ -33,7 +33,6 @@ export default {
     components: { SidebarItem, Logo },
     computed: {
         ...mapState(["settings"]),
-        ...mapGetters(["sidebarRouters", "sidebar"]),
         activeMenu() {
             const route = this.$route;
             const { meta, path } = route;
