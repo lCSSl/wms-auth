@@ -3,15 +3,14 @@ import Cookies from 'js-cookie'
 const TokenKey = 'Access-Token'
 
 const ExpiresInKey = 'Access-Expires-In'
-const expires_in = getExpiresIn()
-const domain = process.env['VUE_APP_COOKIE_DOMAIN ']
+const domain = process.env['VUE_APP_COOKIE_DOMAIN']
 
 export function getToken() {
 	return Cookies.get( TokenKey )
 }
 
 export function setToken( token ) {
-	return Cookies.set( TokenKey, token, { expires_in, domain } )
+	return Cookies.set( TokenKey, token, {  domain } )
 }
 
 export function removeToken() {
