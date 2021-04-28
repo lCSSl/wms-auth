@@ -97,6 +97,16 @@ export default {
           xl: { span: 12, offset: 0 }
         }
         break
+      case 'half_customize':
+        this.gridData = {
+          gutter: 24,
+          xs: { span: 24, offset: 0 },
+          sm: { span: 24, offset: 0 },
+          md: { span: 12, offset: 0 },
+          lg: { span: 12, offset: 0 },
+          xl: { span: 12, offset: 0 }
+        }
+        break
       case 'half-hide':
         this.gridData = {
           gutter: 24,
@@ -107,14 +117,6 @@ export default {
           xl: {span: 12, offset: 0}
         }
         break;
-      case 'half-end':
-        this.gridData.xs.offset = 24
-        this.gridData.sm.offset = 24
-        this.gridData.md.offset = 12
-        this.gridData.lg.offset = 12
-        this.gridData.xl.offset = 12
-        this.colStyle = { display: 'flex', justifyContent: 'flex-end', }
-        break
       case 'one_third':
         this.gridData = {
           gutter: 24,
@@ -124,6 +126,27 @@ export default {
           lg: { span: 8, offset: 0 },
           xl: { span: 8, offset: 0 }
         }
+        break
+      case 'one_third_customize':
+        this.gridData = {
+          gutter: 24,
+          xs: { span: 24, offset: 0 },
+          sm: { span: 24, offset: 0 },
+          md: { span: 8, offset: 16 },
+          lg: { span: 8, offset: 16 },
+          xl: { span: 8, offset: 16 }
+        }
+        break
+      case 'one_third_end':
+        this.gridData = {
+          gutter: 24,
+          xs: { span: 24, offset: 0 },
+          sm: { span: 8, offset: 0 },
+          md: { span: 8, offset: 0 },
+          lg: { span: 8, offset: 0 },
+          xl: { span: 8, offset: 0 }
+        }
+        this.colStyle = { display: 'flex', justifyContent: 'flex-end', }
         break
       case 'two_thirds':
         this.gridData = {

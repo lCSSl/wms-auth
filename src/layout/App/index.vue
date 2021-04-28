@@ -7,7 +7,11 @@
           <span class="header-logo-text">KYLMS</span>
         </ICol>
         <ICol type="half">
-          <Navbar v-if="(token&&token.length>0)"/>
+          <el-row>
+            <ICol type="one_third_customize">
+              <Navbar v-if="(token&&token.length>0)"/>
+            </ICol>
+          </el-row>
         </ICol>
       </el-row>
     </el-header>
