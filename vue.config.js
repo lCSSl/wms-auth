@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'LMS-Auth' // 标题
+const name = defaultSettings.title || '' // 标题
 
 const port = 3000 // 端口
 
